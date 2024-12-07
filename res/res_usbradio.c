@@ -422,8 +422,7 @@ struct usb_device *ast_radio_hid_device_init(const char *desired_device)
 	usb_find_devices();
 	for (usb_bus = usb_busses; usb_bus; usb_bus = usb_bus->next) {
 		for (dev = usb_bus->devices; dev; dev = dev->next) {
-			if ((dev->descriptor.idVendor
-				 == C108_VENDOR_ID) &&
+			if (((dev->descriptor.idVendor == C108_VENDOR_ID) &&
 				(((dev->descriptor.idProduct & 0xfffc) == C108_PRODUCT_ID) ||
 				 (dev->descriptor.idProduct == C108B_PRODUCT_ID) ||
 				 (dev->descriptor.idProduct == C108AH_PRODUCT_ID) ||
@@ -432,7 +431,7 @@ struct usb_device *ast_radio_hid_device_init(const char *desired_device)
 				 ((dev->descriptor.idProduct & 0xff00) == N1KDO_PRODUCT_ID) ||
 				 (dev->descriptor.idProduct == C119_PRODUCT_ID))) ||
 				 ((dev->descriptor.idVendor == AIOC_VENDOR_ID) &&
- 				 (dev->descriptor.idProduct == AIOC_PRODUCT_ID)) {
+ 				 (dev->descriptor.idProduct == AIOC_PRODUCT_ID))) {
 				sprintf(devstr, "%s/%s", usb_bus->dirname, dev->filename);
 				for (i = 0; i < 32; i++) {
 					sprintf(str, "/proc/asound/card%d/usbbus", i);
